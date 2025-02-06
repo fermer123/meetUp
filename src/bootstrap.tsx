@@ -5,6 +5,7 @@ import GlobalStyle from '@app/global';
 import {Suspense} from 'react';
 import Loader from '@components/Loader/Loader';
 import Theme from '@app/Theme/Theme';
+import Header from '@components/Header/Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,7 +14,7 @@ root.render(
     <ErrorBoundary>
       <Theme>
         <GlobalStyle />
-        <Loader />
+        <Header />
       </Theme>
     </ErrorBoundary>
   </Suspense>,

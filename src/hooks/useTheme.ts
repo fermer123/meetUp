@@ -1,6 +1,7 @@
-import {useCallback, useMemo} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 const THEME = 'theme';
+
 const ETheme = {
   LIGHT: 'light',
   DARK: 'dark',
@@ -13,20 +14,22 @@ interface ITheme {
 }
 
 export const useTheme = (): ITheme => {
-  const currentTheme = useMemo(
-    () =>
+  const [currentTheme, setCurrentTheme] = useState<TThemeColors>(() => {
+    return (
       (localStorage.getItem(THEME) as TThemeColors) ||
-      (ETheme.DARK as TThemeColors),
-    [],
-  );
+      (ETheme.DARK as TThemeColors)
+    );
+  });
+  console.log('currentTheme', currentTheme);
+  const toggleTheme = () =>
+    setCurrentTheme((prevTheme) => (prevTheme === 'DARK' ? 'LIGHT' : 'DARK'));
 
-  const setTheme = useCallback(() => {
-    const newTheme = currentTheme === ETheme.DARK ? 'light' : 'dark';
-    localStorage.setItem(THEME, newTheme);
-  }, [currentTheme]);
+  useEffect(() => {
+    localStorage.setItem(THEME, currentTheme);
+  }, [currentTheme, setCurrentTheme]);
 
   return {
-    setTheme,
+    setTheme: toggleTheme,
     theme: currentTheme,
   };
 };

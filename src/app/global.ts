@@ -8,7 +8,10 @@ body{
   font-style: normal;
   font-size: 16px;
   color: ${({theme}) => theme.primaryColor};
-  background-color: ${({theme}) => theme.backGroundColor};
+  background-color: ${({theme}) => {
+    console.log('theme', theme.backGroundColor);
+    return theme.backGroundColor;
+  }};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
