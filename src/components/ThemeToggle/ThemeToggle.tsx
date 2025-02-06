@@ -1,4 +1,5 @@
 import {useTheme} from '@hooks/useTheme';
+
 import {ThemeToggleButton} from './ThemeToggle.styled';
 
 const ThemeToggle = () => {

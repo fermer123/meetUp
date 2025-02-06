@@ -1,11 +1,11 @@
+import {Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
 
-import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
 import GlobalStyle from '@app/global';
-import {Suspense} from 'react';
-import Loader from '@components/Loader/Loader';
 import Theme from '@app/Theme/Theme';
+import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
 import Header from '@components/Header/Header';
+import Loader from '@components/Loader/Loader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

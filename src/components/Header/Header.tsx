@@ -1,4 +1,5 @@
 import ThemeToggle from '@components/ThemeToggle/ThemeToggle';
+
 import {HeaderContainer} from './Header.styled';
 
 const Header = () => {
