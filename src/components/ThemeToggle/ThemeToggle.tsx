@@ -1,4 +1,4 @@
-import {useTheme} from '@hooks/useTheme';
+import {useTheme} from '@provider/ThemeProvider';
 
 import {ThemeToggleButton} from './ThemeToggle.styled';
 

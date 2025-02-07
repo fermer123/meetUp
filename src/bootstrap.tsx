@@ -6,16 +6,19 @@ import Theme from '@app/Theme/Theme';
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
 import Header from '@components/Header/Header';
 import Loader from '@components/Loader/Loader';
+import {ThemeProvider} from '@provider/ThemeProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <Suspense fallback={<Loader />}>
     <ErrorBoundary>
-      <Theme>
-        <GlobalStyle />
-        <Header />
-      </Theme>
+      <ThemeProvider>
+        <Theme>
+          <GlobalStyle />
+          <Header />
+        </Theme>
+      </ThemeProvider>
     </ErrorBoundary>
   </Suspense>,
 );

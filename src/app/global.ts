@@ -3,15 +3,11 @@ import styled, {createGlobalStyle} from 'styled-components';
 import {Box} from '@mui/material';
 
 const GlobalStyle = createGlobalStyle`
-
 body{
   font-style: normal;
   font-size: 16px;
-  color: ${({theme}) => theme.primaryColor};
-  background-color: ${({theme}) => {
-    console.log('theme', theme.backGroundColor);
-    return theme.backGroundColor;
-  }};
+  color: ${({theme}) => theme?.primaryColor};
+  background-color: ${({theme}) => theme.backGroundColor};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;

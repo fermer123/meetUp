@@ -1,8 +1,8 @@
 import {ThemeProvider as ScThemeProvider} from 'styled-components';
 
-import {useTheme} from '@hooks/useTheme';
 import {StyledEngineProvider} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useTheme} from '@provider/ThemeProvider';
 
 import {darkThemeColors, lightThemeColors} from './default_variables';
 
