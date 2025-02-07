@@ -52,7 +52,6 @@
     "analyze": "mkdir dist 2>nul && webpack --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json ",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src/**/*.{ts,tsx} --quiet --fix",
-    "test": "jest --config ./config/jest/jest.config.ts --runInBand --detectOpenHandles --forceExit",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
     "prepare": "husky",
     "prettier": "prettier . --write",

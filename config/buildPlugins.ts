@@ -52,7 +52,7 @@ function buildPlugins({
     // new ModuleFederationPlugin(federationConfig),
 
     new HtmlWebpackPlugin({
-      title: 'microFrontend',
+      title: 'mainApp',
       template: paths.template,
       publicPath: '/',
       base: '/',
