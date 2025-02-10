@@ -2,6 +2,10 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack, {WebpackPluginInstance} from 'webpack';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 
+import {ModuleFederationPlugin} from '@module-federation/enhanced/webpack';
+
+import packageJson from '../package.json';
+
 import {BuildOption} from './types/config';
 
 function buildPlugins({
@@ -9,48 +13,69 @@ function buildPlugins({
   isDev,
   analyzerPort,
 }: BuildOption): WebpackPluginInstance[] {
-  //   const federationConfig = {
-  //     name: 'store',
-  //     filename: 'remoteEntry.js',
-  //     remotes: {
-  //       // snackbar: 'snackbar@http://localhost:3002/remoteEntry.js',
-  //     },
-  //     shared: {
-  //       react: {
-  //         singleton: true,
-  //         eager: true,
-  //         requiredVersion: packageJson.dependencies.react,
-  //       },
-  //       'react-dom': {
-  //         eager: true,
-  //         singleton: true,
-  //         requiredVersion: packageJson.dependencies['react-dom'],
-  //       },
-  //       '@mui/material': {
-  //         singleton: true,
-  //         eager: true,
-  //         requiredVersion: packageJson.dependencies['@mui/material'],
-  //       },
-  //       '@mui/styled-engine-sc': {
-  //         singleton: true,
-  //         eager: true,
-  //         requiredVersion: packageJson.dependencies['@mui/styled-engine-sc'],
-  //       },
-  //       'styled-components': {
-  //         singleton: true,
-  //         eager: true,
-  //         requiredVersion: packageJson.dependencies['styled-components'],
-  //       },
-  //       '@mui/icons-material': {
-  //         singleton: true,
-  //         eager: true,
-  //         requiredVersion: packageJson.devDependencies['@mui/icons-material'],
-  //       },
-  //     },
-  //   };
-  return [
-    // new ModuleFederationPlugin(federationConfig),
+  const federationConfig = {
+    // Это имя приложения
+    name: 'mainApp',
+    // Это имя файла для использования в качестве файла удаленной записи.
+    filename: 'remoteEntry.js',
+    // Это удаленные объекты, которые будет использовать это приложение.
+    remotes: {
+      firstApp: 'firstApp@http://localhost:3002/remoteEntry.js',
+    },
 
+    shared: {
+      ...packageJson?.dependencies,
+      react: {
+        singleton: true,
+        eager: true,
+        requiredVersion: packageJson.dependencies.react,
+      },
+      'react-dom': {
+        // Следует ли немедленно загружать общий модуль
+        eager: true,
+        // Разрешить ли только одну версию общего модуля в общей области действия (режим одиночного модуля)
+        singleton: true,
+        // Требуемая версия, которая может быть диапазоном версий. Значение по умолчанию — это версия зависимости текущего приложения
+        requiredVersion: packageJson.dependencies['react-dom'],
+      },
+      '@mui/material': {
+        singleton: true,
+        eager: true,
+        requiredVersion: packageJson.dependencies['@mui/material'],
+      },
+      '@mui/styled-engine-sc': {
+        singleton: true,
+        eager: true,
+        requiredVersion: packageJson.dependencies['@mui/styled-engine-sc'],
+      },
+      'styled-components': {
+        singleton: true,
+        eager: true,
+        requiredVersion: packageJson.dependencies['styled-components'],
+      },
+    },
+  };
+  return [
+    new ModuleFederationPlugin({
+      ...federationConfig,
+
+      dts: {
+        generateTypes: {
+          abortOnError: true,
+          extractRemoteTypes: true,
+          extractThirdParty: true,
+          deleteTypesFolder: true,
+          generateAPITypes: true,
+          compileInChildProcess: true,
+        },
+        consumeTypes: {
+          consumeAPITypes: true,
+          deleteTypesFolder: true,
+          maxRetries: 3,
+          abortOnError: true,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       title: 'mainApp',
       template: paths.template,

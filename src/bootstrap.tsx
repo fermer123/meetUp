@@ -1,4 +1,5 @@
 import {Suspense} from 'react';
+import BusinessСard from 'firstApp/BusinessСard';
 import ReactDOM from 'react-dom/client';
 
 import GlobalStyle from '@app/global';
@@ -17,6 +18,7 @@ root.render(
         <Theme>
           <GlobalStyle />
           <Header />
+          <BusinessСard value='123' />
         </Theme>
       </ThemeProvider>
     </ErrorBoundary>

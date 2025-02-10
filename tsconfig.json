@@ -18,6 +18,7 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "paths": {
+      "*": ["./@mf-types/*"],
       "@components/*": ["./src/components/*"],
       "@store/*": ["./src/store/*"],
       "@styles/*": ["./src/app/styles/*"],
@@ -36,5 +37,11 @@
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "build"],
-  "include": ["./src", "./config", "global.d.ts", "webpack.config.ts"]
+  "include": [
+    "./src",
+    "./config",
+    "global.d.ts",
+    "webpack.config.ts",
+    "./@mf-types/*"
+  ]
 }

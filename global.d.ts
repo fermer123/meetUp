@@ -11,3 +11,5 @@ declare module 'styled-components' {
     backGroundColor: string;
   }
 }
+
+declare module 'firstApp/BusinessСard';
