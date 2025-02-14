@@ -10,11 +10,7 @@ import {
 
 const THEME = 'theme';
 
-const ETheme = {
-  LIGHT: 'light',
-  DARK: 'dark',
-};
-type TThemeColors = keyof typeof ETheme;
+type TThemeColors = 'DARK' | 'LIGHT';
 
 export interface IThemeContext {
   theme: TThemeColors;

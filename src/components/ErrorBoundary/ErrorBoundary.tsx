@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import {Component, ErrorInfo, ReactNode} from 'react';
 
 import {Button} from '@mui/material';
@@ -24,7 +23,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // eslint-disable-next-line no-console
     console.error('Error caught by ErrorBoundary:', error, errorInfo);
   }
 

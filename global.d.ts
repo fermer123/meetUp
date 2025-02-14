@@ -1,4 +1,5 @@
 import 'styled-components';
+
 declare global {
   declare const isDev: boolean;
   declare const baseURL: string;

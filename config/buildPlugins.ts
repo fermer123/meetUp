@@ -58,22 +58,15 @@ function buildPlugins({
   return [
     new ModuleFederationPlugin({
       ...federationConfig,
-
       dts: {
         generateTypes: {
-          abortOnError: true,
-          extractRemoteTypes: true,
-          extractThirdParty: true,
           deleteTypesFolder: true,
+          extractThirdParty: true,
+          extractRemoteTypes: true,
           generateAPITypes: true,
           compileInChildProcess: true,
         },
-        consumeTypes: {
-          consumeAPITypes: true,
-          deleteTypesFolder: true,
-          maxRetries: 3,
-          abortOnError: true,
-        },
+        consumeTypes: false,
       },
     }),
     new HtmlWebpackPlugin({
