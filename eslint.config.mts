@@ -44,6 +44,7 @@ export default tseslint.config({
       ...globals.es2021,
     },
     parserOptions: {
+      project: ['./tsconfig.json'],
       tsconfigRootDir: import.meta.dirname,
       ecmaFeatures: {
         jsx: true,
@@ -53,10 +54,11 @@ export default tseslint.config({
   files: ['**/*.{js,ts,jsx,tsx}'],
   rules: {
     ...prettierConfig.rules,
+    'sort-react-dependency-arrays/sort': 'error',
     'import/no-cycle': 'off',
     'no-debugger': 'warn',
     'prefer-const': 'warn',
-    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-floating-promises': 'error',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-uses-react': 'off',
     'no-empty-pattern': 'warn',
