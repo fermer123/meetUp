@@ -18,7 +18,7 @@ root.render(
         <Theme>
           <GlobalStyle />
           <Header />
-          <BusinessСard value='123' />
+          <BusinessСard value='Карточка' />
         </Theme>
       </ThemeProvider>
     </ErrorBoundary>

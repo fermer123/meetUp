@@ -58,15 +58,33 @@ function buildPlugins({
   return [
     new ModuleFederationPlugin({
       ...federationConfig,
+      //Настройка генерации типов
       dts: {
         generateTypes: {
           deleteTypesFolder: true,
+          // Удалять ли созданную папку типа
           extractThirdParty: true,
+          // Когда содержимое производителя exposesсодержит модуль,
+          //  содержащий antd, а у потребителя он не antdустановлен,
+          //  то extractThirdParty: trueможно гарантировать, что потребитель может нормально получить модуль exposesтипа производителя
           extractRemoteTypes: true,
+          // Когда контент производителя exposesимеет собственный remotesмодуль,
+          //  который реэкспортирует себя, то extractRemoteTypes: trueможно гарантировать,
+          //  что потребитель может нормально получить тип модуля производителя.exposes
           generateAPITypes: true,
+          // Генерировать ли loadRemoteтип вFederation Runtime
           compileInChildProcess: true,
+          // Выдавать ли ошибку при возникновении проблемы во время генерации типа
         },
-        consumeTypes: false,
+        //используется для управления Module Federationповедением типа потребления (загрузки)
+        consumeTypes: {
+          consumeAPITypes: true,
+          // Генерировать ли тип loadRemoteAPI среды выполнения
+          deleteTypesFolder: true,
+          // Перед загрузкой файлов типа «Удалять ли ранее загруженный typesFolderкаталог»
+          maxRetries: 3,
+          // Максимальное количество повторных попыток при неудачной загрузке
+        },
       },
     }),
     new HtmlWebpackPlugin({

@@ -19,6 +19,7 @@
     "downlevelIteration": true,
     "paths": {
       "*": ["./@mf-types/*"],
+      "firstApp": ["./@mf-types/firstApp*"],
       "@components/*": ["./src/components/*"],
       "@store/*": ["./src/store/*"],
       "@styles/*": ["./src/app/styles/*"],
