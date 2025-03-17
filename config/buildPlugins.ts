@@ -12,6 +12,7 @@ function buildPlugins({
   paths,
   isDev,
   analyzerPort,
+  port,
 }: BuildOption): WebpackPluginInstance[] {
   const federationConfig = {
     // Это имя приложения
@@ -64,7 +65,7 @@ function buildPlugins({
           deleteTypesFolder: true,
           // Удалять ли созданную папку типа
           extractThirdParty: true,
-          // Когда содержимое производителя exposesсодержит модуль,
+          // Когда содержимое производителя exposes содержит модуль,
           //  содержащий antd, а у потребителя он не antdустановлен,
           //  то extractThirdParty: trueможно гарантировать, что потребитель может нормально получить модуль exposesтипа производителя
           extractRemoteTypes: true,
@@ -97,7 +98,7 @@ function buildPlugins({
     }),
     new webpack.DefinePlugin({
       isDev: JSON.stringify(isDev),
-      baseURL: JSON.stringify('http://localhost:3000/'),
+      baseURL: JSON.stringify(port),
     }),
     isDev ? new webpack.HotModuleReplacementPlugin() : undefined,
     isDev
