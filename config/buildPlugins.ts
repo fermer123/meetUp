@@ -21,6 +21,8 @@ function buildPlugins({
     filename: 'remoteEntry.js',
     // Это удаленные объекты, которые будет использовать это приложение.
     remotes: {
+      'manifest-provider':
+        'manifest-provider@http://localhost:3002/mf-manifest.json',
       firstApp: 'firstApp@http://localhost:3002/remoteEntry.js',
     },
 
@@ -59,6 +61,7 @@ function buildPlugins({
   return [
     new ModuleFederationPlugin({
       ...federationConfig,
+      manifest: true,
       //Настройка генерации типов
       dts: {
         generateTypes: {
@@ -73,11 +76,11 @@ function buildPlugins({
           //  который реэкспортирует себя, то extractRemoteTypes: trueможно гарантировать,
           //  что потребитель может нормально получить тип модуля производителя.exposes
           generateAPITypes: true,
-          // Генерировать ли loadRemoteтип вFederation Runtime
+          // Генерировать ли loadRemoteтип в Federation Runtime
           compileInChildProcess: true,
           // Выдавать ли ошибку при возникновении проблемы во время генерации типа
         },
-        //используется для управления Module Federationповедением типа потребления (загрузки)
+        //используется для управления Module Federation поведением типа потребления (загрузки)
         consumeTypes: {
           consumeAPITypes: true,
           // Генерировать ли тип loadRemoteAPI среды выполнения
